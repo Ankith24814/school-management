@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { initDatabase } from '@/lib/db';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     await initDatabase();
     return NextResponse.json({ 
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     await initDatabase();
     return NextResponse.json({ 

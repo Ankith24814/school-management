@@ -1,4 +1,4 @@
-const mysql = require('mysql2/promise');
+import mysql from 'mysql2/promise';
 
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
@@ -105,12 +105,17 @@ async function initDatabase() {
 }
 
 // Load environment variables from .env.local
-try {
-  require('dotenv').config({ path: '.env.local' });
-  console.log('Environment variables loaded from .env.local');
-} catch (error) {
-  console.log('dotenv not found, using default environment variables');
+async function loadEnvAndInit() {
+  try {
+    const dotenv = await import('dotenv');
+    dotenv.config({ path: '.env.local' });
+    console.log('Environment variables loaded from .env.local');
+  } catch {
+    console.log('dotenv not found, using default environment variables');
+  }
+
+  // Run the initialization
+  await initDatabase();
 }
 
-// Run the initialization
-initDatabase();
+loadEnvAndInit();

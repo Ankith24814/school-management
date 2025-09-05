@@ -69,7 +69,7 @@ export default function Home() {
                 </h3>
                 <p className="text-gray-300 leading-relaxed">
                   Discover schools with advanced search, filtering, and beautiful 
-                  card layouts. Find exactly what you're looking for in seconds.
+                  card layouts. Find exactly what you&apos;re looking for in seconds.
                 </p>
                 <div className="mt-6 flex items-center text-purple-400 font-semibold group-hover:text-purple-300 transition-colors">
                   Explore Now
