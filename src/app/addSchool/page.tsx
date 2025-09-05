@@ -66,176 +66,254 @@ export default function AddSchool() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="bg-blue-600 px-6 py-4">
-            <h1 className="text-2xl font-bold text-white text-center">
-              Add New School
-            </h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-12 animate-fade-in-up">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-2xl">
+            <span className="text-3xl">🏫</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Add New School
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Create a comprehensive profile for your school with detailed information and beautiful imagery
+          </p>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-lg shadow-2xl rounded-3xl overflow-hidden border border-white/20">
+          {/* Form Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-white text-xl">📝</span>
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-white">School Information</h2>
+                <p className="text-blue-100">Fill in the details below to register your school</p>
+              </div>
+            </div>
           </div>
           
-          <div className="px-6 py-8">
+          <div className="px-8 py-10">
             {message && (
               <div
-                className={`mb-6 p-4 rounded-md ${
+                className={`mb-8 p-6 rounded-2xl border-2 animate-slide-in-right ${
                   message.type === 'success'
-                    ? 'bg-green-50 text-green-800 border border-green-200'
-                    : 'bg-red-50 text-red-800 border border-red-200'
+                    ? 'bg-green-50 text-green-800 border-green-200'
+                    : 'bg-red-50 text-red-800 border-red-200'
                 }`}
               >
-                {message.text}
+                <div className="flex items-center space-x-3">
+                  <span className="text-2xl">{message.type === 'success' ? '✅' : '⚠️'}</span>
+                  <span className="font-semibold">{message.text}</span>
+                </div>
               </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    School Name *
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+              {/* School Name and Email */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <span className="text-blue-500">🏫</span>
+                    <span>School Name *</span>
                   </label>
                   <input
                     {...register('name')}
                     type="text"
                     id="name"
-                    className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.name ? 'border-red-300' : 'border-gray-300'
+                    className={`form-input w-full px-4 py-4 rounded-xl shadow-sm focus:outline-none ${
+                      errors.name ? 'error' : ''
                     }`}
                     placeholder="Enter school name"
                   />
                   {errors.name && (
-                    <p className="mt-1 text-sm text-red-600">{errors.name.message?.toString()}</p>
+                    <p className="text-sm text-red-600 flex items-center space-x-1">
+                      <span>⚠️</span>
+                      <span>{errors.name.message?.toString()}</span>
+                    </p>
                   )}
                 </div>
 
-                <div>
-                  <label htmlFor="email_id" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
+                <div className="space-y-2">
+                  <label htmlFor="email_id" className="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <span className="text-blue-500">📧</span>
+                    <span>Email Address *</span>
                   </label>
                   <input
                     {...register('email_id')}
                     type="email"
                     id="email_id"
-                    className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.email_id ? 'border-red-300' : 'border-gray-300'
+                    className={`form-input w-full px-4 py-4 rounded-xl shadow-sm focus:outline-none ${
+                      errors.email_id ? 'error' : ''
                     }`}
                     placeholder="Enter email address"
                   />
                   {errors.email_id && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email_id.message?.toString()}</p>
+                    <p className="text-sm text-red-600 flex items-center space-x-1">
+                      <span>⚠️</span>
+                      <span>{errors.email_id.message?.toString()}</span>
+                    </p>
                   )}
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-                  Address *
+              {/* Address */}
+              <div className="space-y-2">
+                <label htmlFor="address" className="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                  <span className="text-blue-500">📍</span>
+                  <span>Complete Address *</span>
                 </label>
                 <textarea
                   {...register('address')}
                   id="address"
-                  rows={3}
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.address ? 'border-red-300' : 'border-gray-300'
+                  rows={4}
+                  className={`form-input w-full px-4 py-4 rounded-xl shadow-sm focus:outline-none resize-none ${
+                    errors.address ? 'error' : ''
                   }`}
-                  placeholder="Enter complete address"
+                  placeholder="Enter complete address with street, area, and landmarks"
                 />
-                                  {errors.address && (
-                    <p className="mt-1 text-sm text-red-600">{errors.address.message?.toString()}</p>
-                  )}
+                {errors.address && (
+                  <p className="text-sm text-red-600 flex items-center space-x-1">
+                    <span>⚠️</span>
+                    <span>{errors.address.message?.toString()}</span>
+                  </p>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-                    City *
+              {/* City and State */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label htmlFor="city" className="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <span className="text-blue-500">🏙️</span>
+                    <span>City *</span>
                   </label>
                   <input
                     {...register('city')}
                     type="text"
                     id="city"
-                    className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.city ? 'border-red-300' : 'border-gray-300'
+                    className={`form-input w-full px-4 py-4 rounded-xl shadow-sm focus:outline-none ${
+                      errors.city ? 'error' : ''
                     }`}
-                    placeholder="Enter city"
+                    placeholder="Enter city name"
                   />
                   {errors.city && (
-                    <p className="mt-1 text-sm text-red-600">{errors.city.message?.toString()}</p>
+                    <p className="text-sm text-red-600 flex items-center space-x-1">
+                      <span>⚠️</span>
+                      <span>{errors.city.message?.toString()}</span>
+                    </p>
                   )}
                 </div>
 
-                <div>
-                  <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">
-                    State *
+                <div className="space-y-2">
+                  <label htmlFor="state" className="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <span className="text-blue-500">🗺️</span>
+                    <span>State *</span>
                   </label>
                   <input
                     {...register('state')}
                     type="text"
                     id="state"
-                    className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.state ? 'border-red-300' : 'border-gray-300'
+                    className={`form-input w-full px-4 py-4 rounded-xl shadow-sm focus:outline-none ${
+                      errors.state ? 'error' : ''
                     }`}
-                    placeholder="Enter state"
+                    placeholder="Enter state name"
                   />
                   {errors.state && (
-                    <p className="mt-1 text-sm text-red-600">{errors.state.message?.toString()}</p>
+                    <p className="text-sm text-red-600 flex items-center space-x-1">
+                      <span>⚠️</span>
+                      <span>{errors.state.message?.toString()}</span>
+                    </p>
                   )}
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="contact" className="block text-sm font-medium text-gray-700 mb-2">
-                  Contact Number *
+              {/* Contact Number */}
+              <div className="space-y-2">
+                <label htmlFor="contact" className="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                  <span className="text-blue-500">📞</span>
+                  <span>Contact Number *</span>
                 </label>
                 <input
                   {...register('contact')}
                   type="tel"
                   id="contact"
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.contact ? 'border-red-300' : 'border-gray-300'
+                  className={`form-input w-full px-4 py-4 rounded-xl shadow-sm focus:outline-none ${
+                    errors.contact ? 'error' : ''
                   }`}
-                  placeholder="Enter contact number"
+                  placeholder="Enter contact number (10+ digits)"
                 />
-                                  {errors.contact && (
-                    <p className="mt-1 text-sm text-red-600">{errors.contact.message?.toString()}</p>
-                  )}
+                {errors.contact && (
+                  <p className="text-sm text-red-600 flex items-center space-x-1">
+                    <span>⚠️</span>
+                    <span>{errors.contact.message?.toString()}</span>
+                  </p>
+                )}
               </div>
 
-              <div>
-                <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
-                  School Image *
+              {/* Image Upload */}
+              <div className="space-y-2">
+                <label htmlFor="image" className="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                  <span className="text-blue-500">🖼️</span>
+                  <span>School Image *</span>
                 </label>
-                <input
-                  {...register('image')}
-                  type="file"
-                  id="image"
-                  accept="image/*"
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.image ? 'border-red-300' : 'border-gray-300'
-                  }`}
-                />
-                                  {errors.image && (
-                    <p className="mt-1 text-sm text-red-600">{errors.image.message?.toString()}</p>
-                  )}
-                <p className="mt-1 text-sm text-gray-500">
-                  Accepted formats: JPG, PNG, GIF. Max size: 5MB
-                </p>
+                <div className="relative">
+                  <input
+                    {...register('image')}
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    className={`form-input w-full px-4 py-4 rounded-xl shadow-sm focus:outline-none ${
+                      errors.image ? 'error' : ''
+                    }`}
+                  />
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                    <span className="text-gray-400 text-2xl">📁</span>
+                  </div>
+                </div>
+                {errors.image && (
+                  <p className="text-sm text-red-600 flex items-center space-x-1">
+                    <span>⚠️</span>
+                    <span>{errors.image.message?.toString()}</span>
+                  </p>
+                )}
+                <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                  <p className="text-sm text-blue-800 flex items-center space-x-2">
+                    <span>💡</span>
+                    <span><strong>Accepted formats:</strong> JPG, PNG, GIF • <strong>Max size:</strong> 5MB • <strong>Recommended:</strong> High-quality school building or campus photo</span>
+                  </p>
+                </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 pt-8">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  {isSubmitting ? 'Adding School...' : 'Add School'}
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <span>Adding School...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center space-x-2">
+                      <span>Add School</span>
+                      <span>✨</span>
+                    </div>
+                  )}
                 </button>
                 
                 <Link
                   href="/showSchools"
-                  className="flex-1 bg-gray-600 text-white py-3 px-6 rounded-md font-medium hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors text-center"
+                  className="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white py-4 px-8 rounded-xl font-semibold hover:from-gray-700 hover:to-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-500/50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center"
                 >
-                  View Schools
+                  <div className="flex items-center justify-center space-x-2">
+                    <span>View Schools</span>
+                    <span>🔍</span>
+                  </div>
                 </Link>
               </div>
             </form>
